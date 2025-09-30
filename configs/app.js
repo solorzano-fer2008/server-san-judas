@@ -8,13 +8,27 @@ import morgan from 'morgan';
 import 'dotenv/config';
 import User from "../src/users/user.model.js";
 import { dbConnection } from './db.js';
+import userModel  from '../src/users/user.model.js';
+import authRoutes from '../src/auth/auth.routes.js'
 
 const middlewares = (app) =>{
     app.use(express.json());
-    app.use(express.urlencoded({extended: false}))
-    app.use(cors());
-    app.use(helmet());
+    app.use(express.urlencoded({extended: false}));
+    app.use(cors({
+        origin: '*',
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+        allowedHeaders:['Content-Type', 'Authorzation']
+    }));
+    app.use(helmet({
+        //crossOriginResourcePolicy: { policy: "cross-origin " },
+        //crossOriginEmbedderPolicy: false
+    }));
     app.use(morgan('dev'));
+}
+
+const routes = (app) =>  {
+    app.use('/api/auth', authRoutes)
 }
 
 const conectarDB = async () => {
@@ -29,6 +43,7 @@ export const initServer = async () => {
 
     try{
         middlewares(app)
+        routes(app)
         await conectarDB()
         app.listen(process.env.PORT, () => {
             console.log(`Server running on port: ${process.env.PORT}`)

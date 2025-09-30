@@ -21,13 +21,13 @@ export const register = async (req, res) => {
             message: "Usuario registrado correctamente",
             userDetails: {
                 user: newuser.username,
-                email: newUser.email, 
+                email: newuser.email, 
             },
         });
     }catch (error){
-        return res.status(500),json({
+        return res.status(500).json({
             message: 'Error al registrar el usuario',
-            err: error,message 
+            err: error.message 
         })
     }
 }
