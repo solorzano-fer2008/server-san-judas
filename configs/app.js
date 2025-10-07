@@ -10,10 +10,11 @@ import User from "../src/users/user.model.js";
 import { dbConnection } from './db.js';
 import userModel  from '../src/users/user.model.js';
 import authRoutes from '../src/auth/auth.routes.js'
+import requestLimit from '../middlewares/request-limit.js';
 
 const middlewares = (app) =>{
     app.use(express.json());
-    app.use(express.urlencoded({extended: false}));
+    app.use(express.urlencoded({extended: false}))
     app.use(cors({
         origin: '*',
         credentials: true,
@@ -25,6 +26,7 @@ const middlewares = (app) =>{
         //crossOriginEmbedderPolicy: false
     }));
     app.use(morgan('dev'));
+    app.use (requestLimit)
 }
 
 const routes = (app) =>  {

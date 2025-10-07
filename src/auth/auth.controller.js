@@ -6,7 +6,7 @@ export const register = async (req, res) => {
     try{
         const data = req.body
 
-        let profilePicture = req.fileRelativePath || 'profiles/default-avatar.png'
+        let profilepicture = req.fileRelativePath || 'profiles/default-avatar.png'
         const encryptedPassword = await hash(data.password)
 
         const newuser = await User.create({
@@ -15,7 +15,7 @@ export const register = async (req, res) => {
             username: data.username,
             email: data.email,
             password: encryptedPassword,
-            profilePicture
+            profilepicture
         })
         return res.status(200).json({
             message: "Usuario registrado correctamente",
@@ -59,7 +59,7 @@ export const login = async (req, res) => {
             userDetails: {
                 username: user.username,
                 token: token,
-                profilePicture: user.profilePicture,
+                profilePicture: user.profilepicture,
                 uid: user.id,
             },
         });
