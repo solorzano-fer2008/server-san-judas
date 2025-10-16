@@ -9,7 +9,7 @@ const postSchema = new  Schema({
     content: {
         type: String,
         required: true,
-        trim: true,
+        trim: true
     },
     author: {
         type: Schema.Types.ObjectId,
@@ -18,7 +18,7 @@ const postSchema = new  Schema({
     },
     comments: ({
         type: Schema.Types.ObjectId,
-        ref: comment
+        ref: 'Comment'
     })
 },{
     timestamps: true,

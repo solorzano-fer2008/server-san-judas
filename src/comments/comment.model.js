@@ -1,8 +1,8 @@
-import {Schema, model} from 'mongoose'
+import { Schema, model } from 'mongoose';
 
-const commentSchema = new Schema ({
+const commentSchema = new Schema({
     text: {
-        type, String,
+        type: String,
         required: true,
         trim: true 
     },
@@ -12,13 +12,13 @@ const commentSchema = new Schema ({
         required: true
     },
     author: {
-        Type: Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId, 
         ref: 'User',
         required: true
-    }
-},{
+    },
+}, {
     timestamps: true,
     versionKey: false
-})
+});
 
-export default model ('Comment', commentSchema)
+export default model('Comment', commentSchema);
