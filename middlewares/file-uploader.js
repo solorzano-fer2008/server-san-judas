@@ -29,4 +29,4 @@ const createMulterConfig = (destinationPath, subFolder) => {
     })
 }
 
-export const uploadProfilePicturre = createMulterConfig("../assets/im/profiles", "profiles")
+export const uploadProfilePicturre = createMulterConfig("../assets/img/profiles", "profiles")

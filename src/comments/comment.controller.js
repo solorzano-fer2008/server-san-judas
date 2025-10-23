@@ -1,5 +1,5 @@
-  import Comment from "./comment.model.js";
-import Post from "./posts/post.model.js";
+import Comment from "./comment.model.js";
+import Post from "../posts/post.models.js";
 
 export const createcomment = async (req, res) => {
     try {
@@ -12,22 +12,23 @@ export const createcomment = async (req, res) => {
             author: authorId,
         });
 
+        console.log(comment._id)
         // Agregar el comnetario al array de comentarios del post
         await  Post.findByIdAndUpdate(post,{
-            $push: { comment: comment._id }
+            $push: { comments: comment._id }
         });
         const populatedComment = await Comment.findById(comment._id)
             .populate('author', 'username name surname profilePicture')
             .populate('post', 'title');
 
             return res.status(201).json({
-                message: "Comentaeio creado exitosamente",
+                message: "Comentario creado exitosamente",
                 comment: populatedComment,
             });
     }catch (error) {
         console.error(error);
         return res.status(500).json({
-            message: "Error al crear el coemntario",
+            message: "Error al crear el comentario",
             error: error.message,
         });
     }

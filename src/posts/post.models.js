@@ -16,10 +16,10 @@ const postSchema = new  Schema({
         ref: 'User',
         required: true 
     },
-    comments: ({
+    comments: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment'
-    })
+}]
 },{
     timestamps: true,
     versionKey: false

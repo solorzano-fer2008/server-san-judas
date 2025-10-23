@@ -38,8 +38,8 @@ const userSchema = new Schema ({
     },
     phone: {
         type: String,
-        minlength: ['El teléfono tiene que tener al menos 8 caracteres'],
-        maxLength: ['El teléfono no debe tener más de 8 caracteres'],
+        minlength: [8,'El teléfono tiene que tener al menos 8 caracteres'],
+        maxLength: [8,'El teléfono no debe tener más de 8 caracteres'],
         trim: true
     },
     role: {

@@ -12,6 +12,7 @@ import userModel  from '../src/users/user.model.js';
 import authRoutes from '../src/auth/auth.routes.js'
 import postRoutes from '../src/posts/post.routes.js'
 import requestLimit from '../middlewares/request-limit.js';
+import commentsRoutes from '../src/comments/comment.routes.js'
 
 const middlewares = (app) =>{
     app.use(express.json());
@@ -20,19 +21,20 @@ const middlewares = (app) =>{
         origin: '*',
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-        allowedHeaders:['Content-Type', 'Authorzation']
+        allowedHeaders:['Content-Type', 'Authorization']
     }));
     app.use(helmet({
-        //crossOriginResourcePolicy: { policy: "cross-origin " },
-        //crossOriginEmbedderPolicy: false
+        crossOriginResourcePolicy: { policy: "cross-origin" },
+        crossOriginEmbedderPolicy: false
     }));
     app.use(morgan('dev'));
     app.use (requestLimit)
 }
 
 const routes = (app) =>  {
-    app.use('/api/auth', authRoutes)
-    app.use('/api/post', postRoutes)
+    app.use('/api/auth', authRoutes);
+    app.use('/api/posts', postRoutes);
+    app.use('/api/comments', commentsRoutes);
 }
 
 const conectarDB = async () => {
